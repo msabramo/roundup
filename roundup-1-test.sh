@@ -38,6 +38,16 @@ it_displays_the_title() {
     test "$first_line" "=" "roundup(5)"
 }
 
+it_displays_help() {
+    first_line=$($SHELL $0 --help | head -n 1)
+    [[ $first_line == "usage: roundup"* ]]
+}
+
+it_displays_the_version() {
+    first_line=$($SHELL $0 --version | head -n 1)
+    [[ $first_line == "roundup version"* ]]
+}
+
 it_exits_non_zero() {
     status=$(set +e ; rup roundup-5 >/dev/null ; echo $?)
     test 2 -eq $status
